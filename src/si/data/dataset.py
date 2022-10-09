@@ -2,6 +2,8 @@
 
 import numpy as np
 import pandas as pd
+import sys
+sys.path.append("/si/io")
 
 class Dataset:
 
@@ -14,7 +16,7 @@ class Dataset:
             features : feature name vector
             label : name of the dependent variable vector
         '''
-        self.X = x
+        self.X = X
         self.y = y
         self.features = features
         self.label = label
@@ -91,6 +93,32 @@ class Dataset:
         '''
         return pd.DataFrame(self.X, self.y, self.features)
 
+    def dropna(self): #Nota que o objeto resultante não deve conter valores nulos em para nenhuma
+                    # feature/variável independente. Nota também que deves atualizar o vetor y
+                    # removendo as entradas associadas às amostras a remover.
+        '''
+            Removes all samples that contain at least one null value
+        '''
+
+        # cria uma máscara com os registos a manter (com todos os valores preenchidos)
+
+        mask_na = np.logical_not(np.any(np.isnan(self.X), axis=1))
+
+        # filtramos para manter apenas os registos que obedeçam à mascara de cima
+        self.X = self.X[mask_na, :]
+        self.y = self.y[mask_na]
+
+    # fazer x== NaN
+    # new_x = x[mask]
+    # nao usar drop na do pandas, tem de ser com o numpy
+
+    def fillna(self, value: int): #Nota que o objeto resultante não deve conter valores nulos em para nenhuma feature/variável independente.
+        '''
+            Replaces all null values by another value that is given
+
+        :param value: a given value
+        '''
+        self.X = np.nan_to_num(self.X, nan = value)
 
 if __name__ == '__main__':
     x = np.array([[1, 2, 3], [4, 5, 6]])  # matriz
@@ -108,4 +136,3 @@ if __name__ == '__main__':
     print('minimo:', dataset.get_min())
     print('summary:', dataset.summary())
     print('Print of dataset', dataset.print_dataframe())
-
