@@ -73,7 +73,7 @@ if __name__ == "__main__":
     # a = read_csv(filename=file, sep = ",", features=True, label=4)
     # print(a.print_dataframe())
     # print(a.summary())
-    # write_csv(a, "csv_write_test1.csv", features=True, label=False)
+    # write_csv(a, "csv_write.csv", features=True, label=False)
 
     file = "C:/Users/Asus/si/datasets/iris_missing_data.csv"
     a = read_csv(filename=file, sep=",", features=True, label=4)
