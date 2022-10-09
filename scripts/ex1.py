@@ -7,8 +7,8 @@ print()
 print('1.1) Neste exercício, vamos usar o iris dataset. Carrega o iris.csv usando o método read apropriado para o tipo de ficheiro')
 print()
 
-ficheiro = 'C:/Users/Asus/si/datasets/iris.csv'
-df = csv.read_csv(ficheiro, features=True, label=True)
+filename = 'C:/Users/Asus/si/datasets/iris.csv'
+df = csv.read_csv(filename, features=True, label=True)
 print(df)
 print()
 
