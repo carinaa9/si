@@ -52,11 +52,11 @@ class SelectPercentile:
 
 
 if __name__ == "__main__":
-    given_percentile = SelectPercentile(0.75)
+    percentile = SelectPercentile(0.50)
     dataset = Dataset(X = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12]]),
                       y = np.array([0,1,2]),
                       features=['f1', 'f2', 'f3', 'f4'],
                       label= 'y')
-    given_percentile = given_percentile.fit_transform(dataset)
+    percentile = percentile.fit_transform(dataset)
     print(dataset.features)
-    print(given_percentile.features)
+    print(percentile.features)
