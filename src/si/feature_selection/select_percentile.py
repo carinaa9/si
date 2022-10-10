@@ -9,7 +9,7 @@ from si.statisics import f_classification
 class SelectPercentile:
 
     def __init__(self, percentile: float = 0.25, score_func: Callable = f_classification) -> None:
-        self.score_func= score_func
+        self.score_func = score_func
         self.percentile = percentile
         self.F = None
         self.p = None

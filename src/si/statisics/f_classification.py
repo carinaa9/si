@@ -5,7 +5,7 @@ import numpy as np
 from scipy import stats
 from si.data.dataset import Dataset
 
-def f_classification(self, dataset:Dataset) -> Tuple:
+def f_classification(dataset:Dataset) -> Tuple:
     '''
         Groups the samples or examples by classes. Computes one-way ANOVA F-value for the provided dataset
 
