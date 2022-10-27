@@ -112,7 +112,7 @@ class RidgeRegression:
 
         :return cost: The cost function of the model
         '''
-        # permite saber se o nosso gradient decent obteve custos minimoos entre os valores estimados e reais
+        # permite saber se o nosso gradient descent obteve custos minimos entre os valores estimados e reais
         # permite ver se o gradiente está a funcionar bem
         # fórmula  no ppt 5 slide 8
         # multiplica o termo de penalização à soma de todos dos thetas ao quadrado dividida pelo dobro do nº das amostras
