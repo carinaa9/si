@@ -52,10 +52,12 @@ class VarianceThreshold():
 
 if __name__ == '__main__':
 
-    dataset = Dataset(X = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12]]),
-                      y = np.array([0,1,2]),
-                      features=['f1', 'f2', 'f3', 'f4'],
-                      label= 'y')
+    dataset = Dataset(X=np.array([[0, 1, 2, 3],
+                                  [0, 2, 4, 6],
+                                  [1, 3, 5, 7]]),
+                      y=np.array([0, 1, 2]),
+                      features=["f1", "f2", "f3", "f4"],
+                      label="y")
 
     selector = VarianceThreshold(threshold=0.1)
     selector = selector.fit(dataset)

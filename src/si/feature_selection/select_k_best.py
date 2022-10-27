@@ -2,12 +2,12 @@
 import numpy as np
 from typing import Callable
 from si.data.dataset import Dataset
-from si.statisics import f_classification
+from si.statisics.f_classification import f_classification
 
 
 class SelectKBest:
 
-    def __init__(self, score_func, k):
+    def __init__(self, score_func: Callable = f_classification, k: int = 10):
         self.score_func = score_func
         self.k = k
         self.F = None
@@ -21,7 +21,6 @@ class SelectKBest:
         :return: self
         '''
         self.F, self.p = self.score_func(dataset)
-
         return self
 
     def transform(self, dataset:Dataset) -> Dataset:
@@ -46,5 +45,19 @@ class SelectKBest:
         :param dataset: a given dataset
         :return: transformed dataset
         '''
-        fit_trans = self.fit(dataset)
-        return fit_trans
+        self.fit(dataset)
+        return self.transform(dataset)
+
+
+if __name__ == '__main__':
+    dataset = Dataset(X=np.array([[0, 1, 2, 3],
+                                  [0, 2, 4, 6],
+                                  [1, 3, 5, 7]]),
+                      y=np.array([0, 1, 2]),
+                      features=["f1", "f2", "f3", "f4"],
+                      label="y")
+
+    kbest =SelectKBest(k= 4)
+    kbest.fit(dataset)
+    transf = kbest.transform(dataset)
+    print(transf.features)

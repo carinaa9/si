@@ -2,19 +2,18 @@
 
 import numpy as np
 import pandas as pd
-import sys
-sys.path.append("/si/io")
+from typing import Tuple, Sequence
+
 
 class Dataset:
 
-    def __init__(self, X,y, features, label):
+    def __init__(self, X: np.ndarray, y: np.ndarray = None, features: Sequence[str] = None, label: str = None):
         '''
-            Contructor;
-            :parameter
-            X : the features matrix/table (independent variables)
-            y : dependent variable vector
-            features : feature name vector
-            label : name of the dependent variable vector
+
+        :param X : the features matrix/table (independent variables)
+        :param y : dependent variable vector
+        :param features : feature name vector
+        :param label : name of the dependent variable vector
         '''
         self.X = X
         self.y = y

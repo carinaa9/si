@@ -4,7 +4,7 @@ from typing import Callable
 import pandas as pd
 import numpy as np
 from si.data.dataset import Dataset
-from si.statisics import f_classification
+from si.statisics.f_classification import f_classification
 
 class SelectPercentile:
 
@@ -35,7 +35,7 @@ class SelectPercentile:
         :return: dataset
         '''
         length = len(dataset.features)
-        percentile_mask = length * self.percentile
+        percentile_mask = int(length * self.percentile)
         idxs = np.argsort(self.F)[-percentile_mask:]
         features = np.array(dataset.features)[idxs]
         return Dataset(X=dataset.X[:, idxs], y=dataset.y, features=list(features), label=dataset.label)
@@ -53,10 +53,12 @@ class SelectPercentile:
 
 if __name__ == "__main__":
     percentile = SelectPercentile(0.50)
-    dataset = Dataset(X = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12]]),
-                      y = np.array([0,1,2]),
-                      features=['f1', 'f2', 'f3', 'f4'],
-                      label= 'y')
+    dataset = Dataset(X=np.array([[0, 1, 2, 3],
+                                  [0, 2, 4, 6],
+                                  [1, 3, 5, 7]]),
+                      y=np.array([0, 1, 2]),
+                      features=["f1", "f2", "f3", "f4"],
+                      label="y")
     percentile = percentile.fit_transform(dataset)
     print(dataset.features)
     print(percentile.features)

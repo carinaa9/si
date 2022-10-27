@@ -5,7 +5,7 @@ from si.data.dataset import Dataset
 from typing import Optional, Union
 
 
-def read_csv(filename: str, sep: str = ",", features: bool = False, label: bool = False) -> Dataset:
+def read_csv(filename: str, sep: str = ',', features: bool = False, label: bool = False) -> Dataset:
     '''
         Reads csv file and returns a Dataset object of that file
 
@@ -44,13 +44,13 @@ def read_csv(filename: str, sep: str = ",", features: bool = False, label: bool 
     return Dataset(X, y, features=features, label=label)
 
 
-def write_csv(dataset, filename: str, sep: str = ",", features: Optional[bool] = True, label: Optional[bool] = True):
+def write_csv(dataset, filename: str, sep: str = ',', features: Optional[bool] = True, label: Optional[bool] = True):
     '''
         Writes a csv file from a dataset object
 
         :param dataset: Dataset to save on csv format
         :param filename: Name of the csv file that will be saved
-        :param sep: Separator of values. Defaults to ",".
+        :param sep: Separator of values. Defaults to ',''.
         :param features: Boolean value that tells if the dataset object has feature names. Defaults to True.
         :param label: Boolean value that tells if the dataset object has label names Defaults to True.
 
@@ -68,14 +68,14 @@ def write_csv(dataset, filename: str, sep: str = ",", features: Optional[bool] =
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # file = "C:/Users/Asus/si/datasets/iris_missing_data.csv"
     # a = read_csv(filename=file, sep = ",", features=True, label=4)
     # print(a.print_dataframe())
     # print(a.summary())
     # write_csv(a, "csv_write.csv", features=True, label=False)
 
-    file = "C:/Users/Asus/si/datasets/iris_missing_data.csv"
+    file = 'C:/Users/Asus/si/datasets/iris_missing_data.csv'
     a = read_csv(filename=file, sep=",", features=True, label=4)
     print(a)
 
