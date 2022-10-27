@@ -40,7 +40,7 @@ class LogisticRegression:
         # gradient descent
         for i in range(self.max_iter):  # tem un+m nº max de iterações
             # predicted y
-            # y é calculado na mesma como o ridge mas aplica-se a funçãi sigmoid
+            # y é calculado na mesma como o ridge mas aplica-se a função sigmoid
             y_pred = (np.dot(dataset.X, self.theta)) + self.theta_zero
             y_pred = sigmoid_function(y_pred)
 
@@ -89,7 +89,7 @@ class LogisticRegression:
         :return mse: The accuracy of the model
         '''
         # obtem as previsoes usando o predict
-        # calcula a accuracyentre os valores reais e as previsoes
+        # calcula a accuracy entre os valores reais e as previsoes
 
         y_pred = self.predict(dataset)
         return accuracy(dataset.y, y_pred)
@@ -102,7 +102,7 @@ class LogisticRegression:
 
         :return cost: The cost function of the model
         '''
-        # permite saber se o nosso gradient decent obteve custos minimoos entre os valores estimados e reais
+        # permite saber se o nosso gradient descent obteve custos minimos entre os valores estimados e reais
         # permite ver se o gradiente está a funcionar bem
         # fórmula  no ppt 5 slide 8
         # multiplica o termo de penalização à soma de todos dos thetas ao quadrado dividida pelo dobro do nº das amostras
