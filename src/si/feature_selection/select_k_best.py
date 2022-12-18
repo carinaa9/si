@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from typing import Callable
-from si.data.dataset import Dataset
-from si.statisics.f_classification import f_classification
+from src.si.data.dataset import Dataset
+from src.si.statisics.f_classification import f_classification
 
 
 class SelectKBest:

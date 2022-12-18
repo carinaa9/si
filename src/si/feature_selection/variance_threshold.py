@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from si.data.dataset import Dataset
+from src.si.data.dataset import Dataset
 
 
 class VarianceThreshold():

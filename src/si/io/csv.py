@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-from si.data.dataset import Dataset
+from src.si.data.dataset import Dataset
 from typing import Optional, Union
 
 

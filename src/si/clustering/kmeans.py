@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 from typing import Tuple, Union, Callable
 
-from si.data.dataset import Dataset
-from si.statisics.euclidean_distance import euclidean_distance
+from src.si.data.dataset import Dataset
+from src.si.statisics.euclidean_distance import euclidean_distance
 
 
 class KMeans:
@@ -42,7 +42,7 @@ class KMeans:
         :param dataset: a given dataset
         '''
         samples = np.random.permutation(dataset.shape()[0][:self.k])  # cria uma permutation com o tamanho do dataset e seleciona apenas k amostras
-        self.centroids = dataset.X[samples]
+        self.centroids = dataset.X[samples, :]
 
     def _get_closest_centroid(self, sample: np.ndarray) -> np.ndarray:
         #calcula a distancia entre uma amostra e os varios centroides
@@ -168,7 +168,7 @@ class KMeans:
 
 
 if __name__ == '__main__':
-    from si.data.dataset import Dataset
+    from src.si.data.dataset import Dataset
     dataset_ = Dataset.from_random(100, 5)
 
     k_ = 3

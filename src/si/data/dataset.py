@@ -47,30 +47,40 @@ class Dataset:
         '''
             Returns the mean value of the feature/variable dependent
         '''
+        if self.X is None: # se o dataset nao for nulo
+            return
         return np.mean(self.X, axis = 0)
 
     def get_variance(self):
         '''
             Returns the variance value of the feature/variable dependent
         '''
+        if self.X is None:
+            return
         return np.var(self.X, axis = 0)
 
     def get_median(self):
         '''
             Returns the median value of the feature/variable dependent
         '''
+        if self.X is None:
+            return
         return np.median(self.X, axis = 0)
 
     def get_min(self):
         '''
             Returns the minimum value of the feature/variable dependent
         '''
+        if self.X is None:
+            return
         return np.min(self.X, axis = 0)
 
     def get_max(self):
         '''
             Returns the maximum value of the feature/variable dependent
         '''
+        if self.X is None:
+            return
         return np.max(self.X, axis = 0)
 
     def summary(self):

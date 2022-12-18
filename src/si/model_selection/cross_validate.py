@@ -48,3 +48,19 @@ def cross_validate(model, dataset: Dataset,
 
     return scores
 
+if __name__ == '__main__':
+    # import dataset
+    from si.data.dataset import Dataset
+    from si.neighbors.knn_classifier import KNNClassifier
+
+    # load and split the dataset
+    dataset_ = Dataset.from_random(600, 100, 2)
+
+    # initialize the KNN
+    knn = KNNClassifier(k=3)
+
+    # cross validate the model
+    scores_ = cross_validate(knn, dataset_, cv=5)
+
+    # print the scores
+    print(scores_)

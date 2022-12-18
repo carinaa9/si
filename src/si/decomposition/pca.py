@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from typing import Tuple, Union, Callable
 from scipy import stats
-from si.data.dataset import Dataset
+from src.si.data.dataset import Dataset
 
 
 

@@ -3,8 +3,9 @@ from typing import Tuple, Union
 from typing import Callable
 import pandas as pd
 import numpy as np
-from si.data.dataset import Dataset
-from si.statisics.f_classification import f_classification
+from src.si.data.dataset import Dataset
+from src.si.statisics.f_classification import f_classification
+
 
 class SelectPercentile:
 
