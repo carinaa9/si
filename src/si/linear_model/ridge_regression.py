@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-from si.data.dataset import Dataset
-from si.metrics.mse import mse
+from src.si.data.dataset import Dataset
+from src.si.metrics.mse import mse
 
 
 class RidgeRegression:

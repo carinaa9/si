@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple, Union
-from si.data.dataset import Dataset
+
 import numpy as np
 def sigmoid_function(X):
     '''

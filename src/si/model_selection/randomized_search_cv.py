@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple, Union, Callable, Dict
 import numpy as np
-from si.data.dataset import Dataset
-from si.model_selection.cross_validate import cross_validate
+from src.si.data.dataset import Dataset
+from src.si.model_selection.cross_validate import cross_validate
 
 
 def randomized_search_cv(model, dataste:Dataset, parameter_distribution: Dict[str, float],

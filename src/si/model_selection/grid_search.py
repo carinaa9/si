@@ -2,8 +2,8 @@
 import itertools
 from typing import Tuple, Union, Callable, Dict
 import numpy as np
-from si.data.dataset import Dataset
-from si.model_selection.cross_validate import cross_validate
+from src.si.data.dataset import Dataset
+from src.si.model_selection.cross_validate import cross_validate
 
 def grid_search(model,
                 dataset: Dataset,
@@ -46,8 +46,8 @@ def grid_search(model,
 
 if __name__ == '__main__':
     # import dataset
-    from si.data.dataset import Dataset
-    from si.linear_model.logistic_regression import LogisticRegression
+    from src.si.data.dataset import Dataset
+    from src.si.linear_model.logistic_regression import LogisticRegression
 
     # load and split the dataset
     dataset_ = Dataset.from_random(600, 100, 2)

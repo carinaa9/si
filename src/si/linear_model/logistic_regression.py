@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple, Union, Callable
 import numpy as np
-from si.data.dataset import Dataset
-from si.metrics.accuracy import accuracy
-from si.statisics.sigmoid_function import sigmoid_function
+from src.si.data.dataset import Dataset
+from src.si.metrics.accuracy import accuracy
+from src.si.statisics.sigmoid_function import sigmoid_function
 
 class LogisticRegression:
 

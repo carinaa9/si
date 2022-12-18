@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple, Union, Callable, Dict
 import numpy as np
-from si.data.dataset import Dataset
-from si.model_selection.split import train_test_split
+from src.si.data.dataset import Dataset
+from src.si.model_selection.split import train_test_split
 
 def cross_validate(model, dataset: Dataset,
                    scoring: Callable = None,

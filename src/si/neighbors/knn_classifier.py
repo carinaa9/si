@@ -3,9 +3,9 @@
 import numpy as np
 
 from typing import Callable, Union
-from si.statisics.euclidean_distance import euclidean_distance
-from si.data.dataset import Dataset
-from si.metrics.accuracy import accuracy
+from src.si.statisics.euclidean_distance import euclidean_distance
+from src.si.data.dataset import Dataset
+from src.si.metrics.accuracy import accuracy
 
 
 class KNNClassifier:
