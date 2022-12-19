@@ -7,7 +7,7 @@ from src.si.metrics.accuracy import accuracy
 
 
 class VotingClassifier:
-    """
+    '''
     Ensemble classifier that uses the majority vote to predict the class labels.
     Parameters
     ----------
@@ -15,7 +15,7 @@ class VotingClassifier:
         Different models for the ensemble.
     Attributes
     ----------
-    """
+    '''
     def __init__(self, models):
         """
         Initialize the ensemble classifier.
@@ -25,6 +25,7 @@ class VotingClassifier:
             Different models for the ensemble.
         """
         # parameters
+        # conjunto de modelos
         self.models = models
 
     def fit(self, dataset: Dataset) -> 'VotingClassifier':
@@ -39,9 +40,11 @@ class VotingClassifier:
         self : VotingClassifier
             The fitted model.
         """
+        # treinar os modelos do ensemble
         for model in self.models:
             model.fit(dataset)
 
+        #retorna ele proprio
         return self
 
     def predict(self, dataset: Dataset) -> np.ndarray:
@@ -56,6 +59,12 @@ class VotingClassifier:
         y : array-like, shape = [n_samples]
             The predicted class labels.
         """
+        # predict: estima a variavel de saida usando os modelos treinados e a função de combinação
+        # previsoes de cada modelo
+        #combina as previsoes de cada modelo usando a técnica de votação
+        # classe mais representada é escolhida
+
+
 
         # helper function
         def _get_majority_vote(pred: np.ndarray) -> int:
@@ -89,6 +98,10 @@ class VotingClassifier:
         score : float
             Mean accuracy
         """
+        # calculo do erro entre as previsoes e os valores reais
+        # usa a accuracy como medida de erro
+        # estima valores de saida(Y) usando modelos treinados (predict)
+
         return accuracy(dataset.y, self.predict(dataset))
 
 

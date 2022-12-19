@@ -23,4 +23,6 @@ def mse_derivative(y_true: np.ndarray, y_pred: np.ndarray):
 
     :return: The derivative of the MSE function.
     '''
+
+    # formula do ppt 
     return -2 * (y_true - y_pred) / (len(y_true) * 2)

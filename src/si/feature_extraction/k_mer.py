@@ -9,6 +9,9 @@ from src.si.data.dataset import Dataset
 
 
 class KMer:
+    #conjunto de substrings de comprimento k contidas numa sequencia
+    # especifico para o DNA (alfabeto: ACTG)
+
     '''
         A sequence descriptor that returns the k-mer composition of the sequence.
 
@@ -16,24 +19,39 @@ class KMer:
 
    '''
 
-    def __init__(self, k: int = 2):
+    def __init__(self, k: int = 3, alphabet: str = 'DNA'):
         '''
 
-        :param k: int. The k-mer length.
+        :param k: The k-mer length.
         '''
-        # parameters
+        # parameters . tamanho da substring
         self.k = k
 
-        # attributes
+        #alfabeto para DNA - da sequencia biologica - composição peptidica
+        # pode ser dna (ACTG) ou aminoacido (_ACDEFGHIKLMNPQRSTVWY)
+        self.alphabet = alphabet.upper() # caso o input seja minusculas
+
+        if self.alphabet == ' DNA':
+            self.alphabet == 'ACTG'
+            #print('It is DNA')
+        elif self.alphabet == 'PROTEIN' or 'PEPTIDE':
+            self.alphabet == '_ACDEFGHIKLMNPQRSTVWY'
+            #print('It is a protein/peptide')
+        else:
+            self.alphabet == self.alphabet
+            #print('That is not a protein/peptide or DNA')
+
+        # attributes - parametros estimados
+        # todos os kmers possiveis
         self.k_mers = None
 
     def fit(self, dataset: Dataset) -> 'KMer':
         '''
-            Fits the descriptor to the dataset.
+            Fits the descriptor to the dataset
 
-        :param dataset : The dataset to fit the descriptor to.
+        :param dataset : The dataset to fit the descriptor to
 
-        :return KMer: The fitted descriptor.
+        :return KMer: The fitted descriptor
         '''
         # generate the k-mers
         self.k_mers = [''.join(k_mer) for k_mer in itertools.product('ACTG', repeat=self.k)]
@@ -91,7 +109,7 @@ if __name__ == '__main__':
                        features=['sequence'],
                        label='label')
 
-    k_mer_ = KMer(k=2)
+    k_mer_ = KMer(k=3)
     dataset_ = k_mer_.fit_transform(dataset_)
     print(dataset_.X)
     print(dataset_.features)
