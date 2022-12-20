@@ -10,4 +10,4 @@ def rmse(y_true: np.ndarray, y_pred: np.ndarray) -> float:
 
     :return float: RMSE between real and predicted values
     '''
-    return np.sqrt(((y_true - y_pred) ** 2).mean())
+    return np.sqrt(np.sum((y_true - y_pred)**2)/len(y_true))

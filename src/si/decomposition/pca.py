@@ -45,14 +45,11 @@ class PCA:
         #n= nº amostras, S dado pelo SVD acima
         # variancia explicada --> primeiros n_components de EV
 
-        #nº amostras do dataset
-        n = len(dataset.X)
-
         #formula do ppt - S do svd
-        EV = (S ** 2) / (n - 1)
+        EV = (S ** 2) / (len(dataset.X) - 1)
 
         #variancia explicada
-        explained_variance = EV[:self.n_components]# primeiros componentes [:componentes]
+        explained_variance = EV[:self.n_components] # primeiros componentes [:componentes]
         return explained_variance
 
 
@@ -66,14 +63,16 @@ class PCA:
         # centrar os dados
         #subtrair media ao dataset e usar a media do fit
         self.mean = np.mean(dataset.X, axis=0)
-        self.centered = dataset.X - self.mean 
+        centered = dataset.X - self.mean 
 
         #calcular X reduced
         # V é a transposta de Vt entao tem de se transpor --> self.components.T
-        V = self.components.T
-        X_reduced = np.dot(self.centered, V)
+        *rest, Vt = (dataset.X - (np.mean(dataset.X, axis = 0)))
 
-        return Dataset(X_reduced, dataset.y, dataset.features_names, dataset.label_name)
+        V = Vt.T
+        X_reduced = np.dot(centered, V)
+
+        return Dataset(X_reduced, dataset.y, dataset.features, dataset.label)
 
 
 
@@ -84,7 +83,7 @@ class PCA:
         :param dataset: Dataset 
         '''
         self.fit(dataset)
-        return self.transform(dataset=dataset)
+        return self.transform(dataset)
 
 
 if __name__ == '__main__':

@@ -26,7 +26,7 @@ def grid_search(model,
         parameters = {} # exemplo: parameter: {'l2_penalty'= 2, 'alpha'= 0,01, etc}
 
         for parameter, value in zip(parameter_grid.keys(), combination):
-            # faz iteração de duas 'sequancias' ao mesmo tempo e atribui ao parameter o primeiro e ao value o segundo
+            # faz iteração de duas 'sequencias' ao mesmo tempo e atribui ao parameter o primeiro e ao value o segundo
             setattr(model, parameter, value)
             parameters[parameter] = value
 

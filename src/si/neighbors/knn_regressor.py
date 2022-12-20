@@ -30,20 +30,19 @@ class KNNRegressor:
         self.dataset = dataset  # dataset de treino para o modelo
         return self
 
-    def _get_closest_label(self, sample):
+    def _get_closest_label(self, sample: np.ndarray):
         '''
             It returns the closest label of the given sample
         :param sample: The sample to get the closest label of
 
         :return label: The closest label
         '''
-        distances = self.distance(sample, self.dataset)
+        distances = self.distance(sample, self.dataset.X)
+        k_nearest_neighbors = np.argsort(distances)[:self.k]
+        k_nearest_neighbors_label = self.dataset.y[k_nearest_neighbors] # np.array com as varias classes
 
-        k_nearest_neighbor = np.argsort(distances)[:self.k]
-        k_nearest_neighbor_label = self.dataset.y[k_nearest_neighbor]
-        labels, counts = np.unique(k_nearest_neighbor, k_nearest_neighbor_label, return_counts=True)
-
-        return labels[np.argmax(counts)]
+        return np.mean(k_nearest_neighbors_label)
+        
 
     def predict(self, dataset: Dataset):
         '''
@@ -54,7 +53,7 @@ class KNNRegressor:
             :param dataset: test dataset
             :return: an array of estimated classes for the test dataset
         '''
-        np.apply_along_axis(self._get_closest_label, axis=1, arr=dataset.X)
+        return np.apply_along_axis(self._get_closest_label, axis=1, arr=dataset.X)
 
     def score(self, dataset: Dataset) -> float:
         '''
