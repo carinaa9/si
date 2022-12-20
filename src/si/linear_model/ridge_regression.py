@@ -4,6 +4,8 @@ import numpy as np
 from src.si.data.dataset import Dataset
 from src.si.metrics.mse import mse
 
+import matplotlib.pyplot as plt
+
 
 class RidgeRegression:
     '''
@@ -44,6 +46,12 @@ class RidgeRegression:
         self.theta = None
         self.theta_zero = None # é o b da funcao y = mx +b
 
+        #adicionado (ex6)
+        self.cost_history = {} # dicionario vazio
+        #durante o gradient, computa a função do custo(self.cost(dataset) e armazena no dict)
+        # a chave é o nº da iteração
+        # o valor é o custo na iteração
+
     def fit(self, dataset: Dataset) -> 'RidgeRegression':
         '''
         Fit the model to the dataset
@@ -58,8 +66,9 @@ class RidgeRegression:
         self.theta = np.zeros(n) # o tamanho do theta é o tamanho de colunas/features do dataset
         self.theta_zero = 0
 
-        # gradient descent
-        for i in range(self.max_iter): # tem un+m nº max de iterações
+        # GRADIENT DESCENT
+
+        for custo in range(self.max_iter): # tem un+m nº max de iterações
             # predicted y
             y_pred = np.dot(dataset.X, self.theta) + self.theta_zero
 
@@ -77,6 +86,17 @@ class RidgeRegression:
             # updating the model parameters
             self.theta = self.theta - gradient - penalization_term
             self.theta_zero = self.theta_zero - (self.alpha * (1 / m)) * np.sum(y_pred - dataset.y)
+
+            #cost history implementado
+            #computa a função do custo e armazena no dict
+            self.cost_history[custo] = self.cost(dataset)
+
+            #6.3)
+            #parar quando o valor de custo nao muda
+            #Este algoritmo deve parar quando o valor da função de custo ( J/ self.cost ) não se altera.
+            # se custo maior que 1 e o custo anterior menos o de agora for menor que 1 --> parar
+            if custo > 1 and self.cost_history[custo-1] - self.cost_history[custo] < 1:
+                break
 
         return self
 
@@ -120,6 +140,25 @@ class RidgeRegression:
 
         y_pred = self.predict(dataset)
         return (np.sum((y_pred - dataset.y) ** 2) + (self.l2_penalty * np.sum(self.theta ** 2))) / (2 * len(dataset.y))
+
+    def lineplot_cost(self):
+        '''
+            It allows you to visualize the behavior of the cost depending on the number of iterations
+        '''
+        
+        #x tem nº de iterações
+        x_axis = list(self.cost_history.keys())
+
+        #y tem valor de custo
+        y_axis = list(self.cost_history.values())
+
+        plt.plot(x_axis, y_axis, 'g')
+        plt.title('Cost vs. Iterations')
+        plt.xlabel('Iterations')
+        plt.ylabel('Cost')
+        plt.show()
+        
+ 
 
 
 if __name__ == '__main__':

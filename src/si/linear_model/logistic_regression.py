@@ -5,6 +5,8 @@ from src.si.data.dataset import Dataset
 from src.si.metrics.accuracy import accuracy
 from src.si.statisics.sigmoid_function import sigmoid_function
 
+import matplotlib.pyplot as plt
+
 class LogisticRegression:
 
     def __init__(self, l2_penalty: float = 1, alpha: float = 0.001, max_iter: int = 1000, sigmoid_function: Callable = sigmoid_function):
@@ -23,6 +25,12 @@ class LogisticRegression:
         self.theta = None # features
         self.theta_zero = None  # é o b da funcao y = mx +b
 
+        #adicionado (ex6)
+        self.cost_history = {} # dicionario vazio
+        #durante o gradient, computa a função do custo(self.cost(dataset) e armazena no dict)
+        # a chave é o nº da iteração
+        # o valor é o custo na iteração
+
     def fit(self, dataset: Dataset) -> 'LogisticRegression':
         '''
             Fit the model to the dataset
@@ -38,7 +46,7 @@ class LogisticRegression:
         self.theta_zero = 0
 
         # gradient descent
-        for i in range(self.max_iter):  # tem un+m nº max de iterações
+        for custo in range(self.max_iter):  # tem un+m nº max de iterações
             # predicted y
             # y é calculado na mesma como o ridge mas aplica-se a função sigmoid
             y_pred = (np.dot(dataset.X, self.theta)) + self.theta_zero
@@ -60,6 +68,14 @@ class LogisticRegression:
             self.theta = self.theta - gradient - penalization_term
             self.theta_zero = self.theta_zero - (self.alpha * (1 / m)) * np.sum(y_pred - dataset.y)
 
+            #cost history implementado
+            #computa a função do custo e armazena no dict
+            self.cost_history[custo] = self.cost(dataset)
+
+            #parar quando o valor de custo nao muda
+            # se custo maior que 1 e o custo anterior menos o de agora for menor que 1 --> parar
+            if custo > 1 and self.cost_history[custo-1] - self.cost_history[custo] < 0.0001:
+                break
         return self
 
     def predict(self, dataset: Dataset) -> np.array:
@@ -114,6 +130,23 @@ class LogisticRegression:
         cost = cost + (self.l2_penalty * np.sum(self.theta **2)/ (2 * dataset.shape()[0]))
         return cost
 
+    def lineplot_cost(self):
+        '''
+            It allows you to visualize the behavior of the cost depending on the number of iterations
+        '''
+        
+        #x tem nº de iterações
+        x_axis = list(self.cost_history.keys())
+
+        #y tem valor de custo
+        y_axis = list(self.cost_history.values())
+
+        plt.plot(x_axis, y_axis, 'g')
+        plt.title('Cost vs. Iterations')
+        plt.xlabel('Iterations')
+        plt.ylabel('Cost')
+        plt.show()
+        
 
 if __name__ == '__main__':
 
