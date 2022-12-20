@@ -8,6 +8,8 @@ import numpy as np
 from src.si.data.dataset import Dataset
 
 
+
+
 class KMer:
     #conjunto de substrings de comprimento k contidas numa sequencia
     # especifico para o DNA (alfabeto: ACTG)
@@ -28,17 +30,17 @@ class KMer:
         self.k = k
 
         #alfabeto para DNA - da sequencia biologica - composição peptidica
-        # pode ser dna (ACTG) ou aminoacido (_ACDEFGHIKLMNPQRSTVWY)
+        # pode ser dna (ACTG) ou aminoacido (_ACDEFGHIKLMNPQRSTVWY ou FLIMVSPTAY_HQNKDECWRG)
         self.alphabet = alphabet.upper() # caso o input seja minusculas
 
-        if self.alphabet == ' DNA':
-            self.alphabet == 'ACTG'
+        if self.alphabet == 'DNA':
+            self.alphabet = 'ACTG'
             #print('It is DNA')
-        elif self.alphabet == 'PROTEIN' or 'PEPTIDE':
-            self.alphabet == '_ACDEFGHIKLMNPQRSTVWY'
+        elif self.alphabet == 'PROTEIN':
+            self.alphabet = '_ACDEFGHIKLMNPQRSTVWY'
             #print('It is a protein/peptide')
         else:
-            self.alphabet == self.alphabet
+            self.alphabet = self.alphabet
             #print('That is not a protein/peptide or DNA')
 
         # attributes - parametros estimados
@@ -54,7 +56,7 @@ class KMer:
         :return KMer: The fitted descriptor
         '''
         # generate the k-mers
-        self.k_mers = [''.join(k_mer) for k_mer in itertools.product('ACTG', repeat=self.k)]
+        self.k_mers = [''.join(k_mer) for k_mer in itertools.product(self.alphabet, repeat=self.k)]
         return self
 
     def _get_sequence_k_mer_composition(self, sequence: str) -> np.ndarray:
@@ -98,7 +100,8 @@ class KMer:
         :param dataset : The dataset to fit the descriptor to and transform.
         :return: The transformed dataset.
         '''
-        return self.fit(dataset).transform(dataset)
+        self.fit(dataset)
+        return self.transform(dataset)
 
 
 if __name__ == '__main__':

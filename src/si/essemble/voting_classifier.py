@@ -83,8 +83,8 @@ class VotingClassifier:
             labels, counts = np.unique(pred, return_counts=True)
             return labels[np.argmax(counts)]
 
-        predictions = np.array([model.predict(dataset) for model in self.models]).transpose()
-        return np.apply_along_axis(_get_majority_vote, axis=1, arr=predictions)
+        predictions = np.array([model.predict(dataset) for model in self.models]).transpose() 
+        return np.apply_along_axis(_get_majority_vote, axis = 1, arr=predictions)
 
     def score(self, dataset: Dataset) -> float:
         """

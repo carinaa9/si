@@ -10,7 +10,7 @@ from src.si.metrics.accuracy import accuracy
 
 class KNNClassifier:
 
-    def __init__(self, k: int, distance: Callable = euclidean_distance) -> None:
+    def __init__(self, k: int = 1, distance: Callable = euclidean_distance) -> None:
         '''
             This algorithm predicts the class for a sample using the k most similar examples.
         :param k: number of examples to consider
@@ -38,14 +38,14 @@ class KNNClassifier:
         :return label: The closest label
         '''
         # compute the distance between the sample and the dataset
-        distances = self.distance(sample, self.dataset)
+        distances = self.distance(sample, self.dataset.X)
         # get the k nearest neighbors
         k_nearest_neighbor = np.argsort(distances)[:self.k]
         # get the labels of the k nearest neighbors
         k_nearest_neighbor_label = self.dataset.y[k_nearest_neighbor]
         # get the most common label
-        labels, counts = np.unique(k_nearest_neighbor, k_nearest_neighbor_label, return_counts=True)
-
+        labels, counts = np.unique(k_nearest_neighbor_label, return_counts=True)
+        
         return labels[np.argmax(counts)]
 
     def predict(self, dataset: Dataset) -> np.ndarray:
@@ -57,7 +57,7 @@ class KNNClassifier:
         :param dataset: test dataset
         :return: an array of estimated classes for the test dataset
         '''
-        np.apply_along_axis(self._get_closest_label, axis=1, arr=dataset.X)
+        return np.apply_along_axis(self._get_closest_label, axis=1, arr=dataset.X)
 
     def score(self, dataset: Dataset) -> float:
         '''

@@ -19,7 +19,7 @@ def randomized_search_cv(model,
     # test --> scores do modelo no dataset de teste para cada fold 
     scores = {
         'parameters': [],
-        'seed': [],
+        'seeds': [],
         'train': [],
         'test': []
     }
