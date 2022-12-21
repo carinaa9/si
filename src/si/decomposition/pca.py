@@ -12,10 +12,11 @@ class PCA:
 
     def __init__(self, n_components: int) -> None:
         '''
-            It performs the Principal Component Analysis (PCA) on a givrn dataset, using the Singular Value Decomposition method.
+        It performs the Principal Component Analysis (PCA) on a givrn dataset, using the Singular Value Decomposition method
 
-        :param n_components: Number of components to be considered and returned from the analysis.
+        :param n_components: Number of components to be considered and returned from the analysis
         '''
+
         self.n_components = n_components
 
         #parametros estimados
@@ -25,7 +26,7 @@ class PCA:
 
     def fit(self, dataset: Dataset) -> 'PCA':
         '''
-            It fits the data and stores the mean values of each sample, the principial components and the explained variance.
+        It fits the data and stores the mean values of each sample, the principial components and the explained variance
 
         :param dataset: Dataset 
         '''
@@ -55,7 +56,7 @@ class PCA:
 
     def transform(self, dataset: Dataset) -> Dataset:
         '''
-            Returns the calculated reduced Singular Value Decomposition (SVD)
+        Returns the calculated reduced Singular Value Decomposition (SVD)
 
         :param dataset: Dataset 
         '''
@@ -78,10 +79,11 @@ class PCA:
 
     def fit_transform(self, dataset: Dataset) -> None:
         '''
-            It fit and transform the dataset
+        It fit and transform the dataset
 
         :param dataset: Dataset 
         '''
+
         self.fit(dataset)
         return self.transform(dataset)
 

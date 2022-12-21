@@ -10,14 +10,14 @@ from src.si.statisics.euclidean_distance import euclidean_distance
 
 class KMeans:
     '''
-        It performs k-means clustering on the dataset.
-        It groups samples into k clusters by trying to minimize the distance between samples and their closest centroid.
-        It returns the centroids and the indexes of the closest centroid for each point.
+    It performs k-means clustering on the dataset
+    It groups samples into k clusters by trying to minimize the distance between samples and their closest centroid
+    It returns the centroids and the indexes of the closest centroid for each point
     '''
 
     def __init__(self, k: int, max_iter: int = 1000, distance: Callable = euclidean_distance):
         '''
-            K-means clustering algorithm.
+        K-means clustering algorithm
 
         :param k: number of clusters/centroids
         :param max_iter: maximum number of iterations
@@ -36,8 +36,8 @@ class KMeans:
 
         #Constroi os centroides fora do fit atraves de permutation
         '''
-            Infers the centroids by minimizing the distance between the samples and the centroid
-            It generates initial k centroids.
+        Infers the centroids by minimizing the distance between the samples and the centroid
+        It generates initial k centroids
 
         :param dataset: a given dataset
         '''
@@ -49,11 +49,10 @@ class KMeans:
         #escolhe o centroide com a distancia mais curta e aplica o metodo a todas as amostras do dataset dado
 
         '''
-            Get the closest centroid to each data point.
+        Get the closest centroid to each data point
 
-        :param sample : np.ndarray, shape=(n_features,). A sample.
-
-        :return np.ndarray: The closest centroid to each data point.
+        :param sample : np.ndarray, shape=(n_features,). A sample
+        :return np.ndarray: The closest centroid to each data point
         '''
         centroids_distances = self.distance(sample, self.centroids)
         closest_centroid_index = np.argmin(centroids_distances, axis=0) # o np.argmin dá o indice da menor distancia // por norma o axis = 0 sao linhas e 1 é colunas
@@ -65,13 +64,12 @@ class KMeans:
         # aplica os objetos centroids e closer_centroids
 
         '''
-            It fits k-means clustering on the dataset.
-            The k-means algorithm initializes the centroids and then iteratively updates them until convergence or max_iter.
-            Convergence is reached when the centroids do not change anymore.
+        It fits k-means clustering on the dataset
+        The k-means algorithm initializes the centroids and then iteratively updates them until convergence or max_iter
+        Convergence is reached when the centroids do not change anymore
 
-        :param dataset: Dataset object.
-
-        :return KMeans: KMeans object.
+        :param dataset: Dataset object
+        :return KMeans: KMeans object
         '''
         # generate initial centroids
         self._init_centroids(dataset)  #centroides iniciais
@@ -111,34 +109,31 @@ class KMeans:
 
     def _get_distances(self, sample: np.ndarray) -> np.ndarray:
         '''
-            It computes the distance between each sample and the closest centroid.
+        It computes the distance between each sample and the closest centroid
 
-        :param sample : np.ndarray, shape=(n_features,). A sample.
-
-        :return np.ndarray: Distances between each sample and the closest centroid.
+        :param sample : np.ndarray, shape=(n_features,). A sample
+        :return np.ndarray: Distances between each sample and the closest centroid
         '''
         return self.distance(sample, self.centroids)
 
     def transform(self, dataset: Dataset) -> np.ndarray:
         # calcula a distancia entre cada amostras e os diversos centroides
         '''
-            It transforms the dataset.
-            It computes the distance between each sample and the closest centroid.
+        It transforms the dataset
+        It computes the distance between each sample and the closest centroid
 
-        :param dataset: Dataset object.
-
-        :return np.ndarray: Transformed dataset.
+        :param dataset: Dataset object
+        :return np.ndarray: Transformed dataset
         '''
         centroids_distances = np.apply_along_axis(self._get_distances, axis=1, arr=dataset.X)
         return centroids_distances
 
     def fit_transform(self, dataset: Dataset) -> np.ndarray:
         '''
-            It fits and transforms the dataset.
+        It fits and transforms the dataset
 
-        :param dataset: Dataset object.
-
-        :return np.ndarray: Transformed dataset.
+        :param dataset: Dataset object
+        :return np.ndarray: Transformed dataset
         '''
         self.fit(dataset)
         return self.transform(dataset)
@@ -148,20 +143,19 @@ class KMeans:
         # escolhe o centroide com a distancia mais curta e aplica o metodo ao dataset inteiro
 
         '''
-            It predicts the labels of the dataset.
+        It predicts the labels of the dataset
 
-        :param dataset: Dataset object.
-
-        :return np.ndarray: Predicted labels.
+        :param dataset: Dataset object
+        :return np.ndarray: Predicted labels
        '''
         return np.apply_along_axis(self._get_closest_centroid, axis=1, arr=dataset.X)
 
     def fit_predict(self, dataset: Dataset) -> np.ndarray:
         '''
-            It fits and predicts the labels of the dataset.
-        :param dataset: Dataset object.
+        It fits and predicts the labels of the dataset
 
-        :return np.ndarray: Predicted labels.
+        :param dataset: Dataset object
+        :return np.ndarray: Predicted labels
         '''
         self.fit(dataset)
         return self.predict(dataset)
