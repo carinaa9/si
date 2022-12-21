@@ -5,10 +5,10 @@ import numpy as np
 from scipy import stats
 from src.si.data.dataset import Dataset
 
-def f_classification(dataset:Dataset) -> Union[Tuple[np.ndarray, np.ndarray],
-                                                Tuple[float, float]]:
+def f_classification(dataset:Dataset) -> Union[Tuple[np.ndarray, np.ndarray], Tuple[float, float]]:
     '''
-        Groups the samples or examples by classes. Computes one-way ANOVA F-value for the provided dataset
+    Groups the samples or examples by classes
+    Computes one-way ANOVA F-value for the provided dataset
 
     :param dataset: a given dataset
     :return: F and p values

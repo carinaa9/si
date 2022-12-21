@@ -9,7 +9,6 @@ class Dataset:
 
     def __init__(self, X: np.ndarray, y: np.ndarray = None, features: Sequence[str] = None, label: str = None):
         '''
-
         :param X : the features matrix/table (independent variables)
         :param y : dependent variable vector
         :param features : feature name vector

@@ -9,17 +9,12 @@ import matplotlib.pyplot as plt
 
 class RidgeRegression:
     '''
-        The RidgeRegression is a linear model using the L2 regularization.
+    The RidgeRegression is a linear model using the L2 regularization.
     This model solves the linear regression problem using an adapted Gradient Descent technique
 
-    Parameters
-    ----------
-    l2_penalty: float
-        The L2 regularization parameter
-    alpha: float
-        The learning rate
-    max_iter: int
-        The maximum number of iterations
+    :param l2_penalty: The L2 regularization parameter
+    :param alpha: The learning rate
+    :param max_iter: The maximum number of iterations
 
     Attributes
     ----------
@@ -32,7 +27,6 @@ class RidgeRegression:
     '''
     def __init__(self, l2_penalty: float = 1, alpha: float = 0.001, max_iter: int = 1000):
         '''
-
         :param l2_penalty: he L2 regularization parameter
         :param alpha: The learning rate
         :param max_iter: The maximum number of iterations
@@ -57,7 +51,6 @@ class RidgeRegression:
         Fit the model to the dataset
 
         :param dataset: The dataset to fit the model to
-
         :return self: The fitted model
         '''
         m, n = dataset.shape()
@@ -105,7 +98,6 @@ class RidgeRegression:
         Predict the output of the dataset
 
         :param dataset: The dataset to predict the output of
-
         :return predictions: The predictions of the dataset
         '''
         # estima os valores de y usando o theta e theta_zero
@@ -116,7 +108,6 @@ class RidgeRegression:
         Compute the Mean Square Error of the model on the dataset
 
         :param dataset: The dataset to compute the MSE on
-
         :return mse: The Mean Square Error of the model
         '''
         # estima dos valores de y usando o theta e o theta_zero
@@ -129,7 +120,6 @@ class RidgeRegression:
         Compute the cost function (J function) of the model on the dataset using L2 regularization
 
         :param dataset: The dataset to compute the cost function on
-
         :return cost: The cost function of the model
         '''
         # permite saber se o nosso gradient descent obteve custos minimos entre os valores estimados e reais
@@ -152,7 +142,7 @@ class RidgeRegression:
         #y tem valor de custo
         y_axis = list(self.cost_history.values())
 
-        plt.plot(x_axis, y_axis, 'g')
+        plt.plot(x_axis, y_axis, 'r')
         plt.title('Cost vs. Iterations')
         plt.xlabel('Iterations')
         plt.ylabel('Cost')

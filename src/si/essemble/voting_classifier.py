@@ -9,37 +9,27 @@ from src.si.metrics.accuracy import accuracy
 class VotingClassifier:
     '''
     Ensemble classifier that uses the majority vote to predict the class labels.
-    Parameters
-    ----------
-    models : array-like, shape = [n_models]
-        Different models for the ensemble.
-    Attributes
-    ----------
+
+    :param models : array-like, shape = [n_models]
+        Different models for the ensemble
     '''
     def __init__(self, models):
         """
-        Initialize the ensemble classifier.
-        Parameters
-        ----------
-        models: array-like, shape = [n_models]
-            Different models for the ensemble.
+        Initialize the ensemble classifier
+
+        :param models: Different models for the ensemble
         """
         # parameters
         # conjunto de modelos
         self.models = models
 
     def fit(self, dataset: Dataset) -> 'VotingClassifier':
-        """
+        '''
         Fit the models according to the given training data.
-        Parameters
-        ----------
-        dataset : Dataset
-            The training data.
-        Returns
-        -------
-        self : VotingClassifier
-            The fitted model.
-        """
+
+        :param dataset : The training data
+        :return self : The fitted model
+        '''
         # treinar os modelos do ensemble
         for model in self.models:
             model.fit(dataset)
@@ -48,17 +38,12 @@ class VotingClassifier:
         return self
 
     def predict(self, dataset: Dataset) -> np.ndarray:
-        """
+        '''
         Predict class labels for samples in X.
-        Parameters
-        ----------
-        dataset : Dataset
-            The test data.
-        Returns
-        -------
-        y : array-like, shape = [n_samples]
-            The predicted class labels.
-        """
+
+        :param dataset : The test data
+        :return y : The predicted class labels
+        '''
         # predict: estima a variavel de saida usando os modelos treinados e a função de combinação
         # previsoes de cada modelo
         #combina as previsoes de cada modelo usando a técnica de votação
@@ -68,17 +53,12 @@ class VotingClassifier:
 
         # helper function
         def _get_majority_vote(pred: np.ndarray) -> int:
-            """
+            '''
             It returns the majority vote of the given predictions
-            Parameters
-            ----------
-            pred: np.ndarray
-                The predictions to get the majority vote of
-            Returns
-            -------
-            majority_vote: int
-                The majority vote of the given predictions
-            """
+
+            :param pred: The predictions to get the majority vote of
+            :return majority_vote: The majority vote of the given predictions
+            '''
             # get the most common label
             labels, counts = np.unique(pred, return_counts=True)
             return labels[np.argmax(counts)]
@@ -87,17 +67,12 @@ class VotingClassifier:
         return np.apply_along_axis(_get_majority_vote, axis = 1, arr=predictions)
 
     def score(self, dataset: Dataset) -> float:
-        """
+        '''
         Returns the mean accuracy on the given test data and labels.
-        Parameters
-        ----------
-        dataset : Dataset
-            The test data.
-        Returns
-        -------
-        score : float
-            Mean accuracy
-        """
+
+        :param dataset: The test data
+        :return score: Mean accuracy
+        '''
         # calculo do erro entre as previsoes e os valores reais
         # usa a accuracy como medida de erro
         # estima valores de saida(Y) usando modelos treinados (predict)
@@ -127,6 +102,6 @@ if __name__ == '__main__':
 
     # compute the score
     score = voting.score(dataset_test)
-    print(f"Score: {score}")
+    print(f'Score: {score}')
 
     print(voting.predict(dataset_test))

@@ -11,7 +11,16 @@ def randomized_search_cv(model,
                         scoring: Callable = None, cv: int = 3, 
                         n_iter: int = 1000,
                         test_size: float = 0.2) -> Dict[str, list[float]]:
-    
+    '''
+    It allows you to credibly evaluate the performance of a model on a given dataset
+
+    :param model: model to cross validate
+    :param dataset: a given dataset
+    :param scoring: score
+    :param cv: number of folds
+    :param test_size: the size of the test set
+    '''
+
     #lista de dicionarios com chaves de:
     # parameters --> combinação de parametros 
     # seeds --> seeds geradas para cada fold 

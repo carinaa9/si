@@ -6,7 +6,7 @@ import numpy as np
 
 from src.si.data.dataset import Dataset
 from src.si.metrics.accuracy import accuracy
-from src.si.metrics.mse import mse
+from src.si.metrics.mse import mse_derivative, mse
 from src.si.neural_networks.layer import Dense
 
 
@@ -20,7 +20,7 @@ class NN:
     '''
 
     def __init__(self, layers: list, epochs: int = 1000, learning_rate: float = 0.01,
-                 loss_function: Callable = mse, loss_derivate : Callable = mse_derivate,
+                 loss_function: Callable = mse, loss_derivate : Callable = mse_derivative,
                  verbose: bool = False):
         '''
         Initialize the neural network model.

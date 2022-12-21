@@ -13,6 +13,10 @@ class StackingClassifier:
     #modelo final usado para prever a variavel de saida (Y)
 
     def __init__(self, models: list, final_model):
+        '''
+        :param models:  models
+        :param final_model: the final model
+        '''
         # conjunto de modelos
         self.models = models 
 
@@ -67,6 +71,7 @@ class StackingClassifier:
         '''
         Calculates the accuracy of the model
 
+        :param dataset: dataset to calculate the score
         :return: accuracy of the model
         '''
         # calculo do erro entre as previsoes e os valores reais

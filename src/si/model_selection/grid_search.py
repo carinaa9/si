@@ -11,7 +11,15 @@ def grid_search(model,
                 scoring: Callable = None,
                 cv: int = 3,
                 test_size: float = 0.2) -> Dict[str, list[float]]:
+    '''
+        It allows you to credibly evaluate the performance of a model on a given dataset
 
+        :param model: model to cross validate
+        :param dataset: a given dataset
+        :param scoring: score
+        :param cv: number of folds
+        :param test_size: the size of the test set
+        '''
     for parameter in parameter_grid:
         # verificar se o modelo do utilizador retorna um parametro atraves de true or false
         if not hasattr(model, parameter):

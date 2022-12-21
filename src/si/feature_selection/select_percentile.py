@@ -17,7 +17,7 @@ class SelectPercentile:
 
     def fit(self, dataset: Dataset):
         '''
-            Estimates the F and p for each feature using the scoring_func
+        Estimates the F and p for each feature using the scoring_func
 
         :param dataset: a given dataset
         :return: self
@@ -28,9 +28,9 @@ class SelectPercentile:
 
     def transform(self, dataset: Dataset) -> Dataset:
         '''
-           Selects the features with the highest F value up to the indicated percentile.
-           (for a dataset with 10 features and a 50% percentile, the transform should select
-           the 5 features with higher F value)
+        Selects the features with the highest F value up to the indicated percentile.
+        (for a dataset with 10 features and a 50% percentile, the transform should select
+        the 5 features with higher F value)
 
         :param dataset: a given dataset
         :return: dataset
@@ -43,7 +43,7 @@ class SelectPercentile:
 
     def fit_transform(self, dataset: Dataset) -> Dataset:
         '''
-            Runs the fit and then the transform
+        Runs the fit and then the transform
 
         :param dataset: a given dataset
         :return: transformed dataset
@@ -52,7 +52,7 @@ class SelectPercentile:
         return self.transform(dataset)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     percentile = SelectPercentile(0.50)
     dataset = Dataset(X=np.array([[0, 1, 2, 3],
                                   [0, 2, 4, 6],

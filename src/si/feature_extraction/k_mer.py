@@ -15,15 +15,13 @@ class KMer:
     # especifico para o DNA (alfabeto: ACTG)
 
     '''
-        A sequence descriptor that returns the k-mer composition of the sequence.
+    A sequence descriptor that returns the k-mer composition of the sequence
 
-    :param k: int. The k-mer length.
-
+    :param k: int. The k-mer length
    '''
 
     def __init__(self, k: int = 3, alphabet: str = 'DNA'):
         '''
-
         :param k: The k-mer length.
         '''
         # parameters . tamanho da substring
@@ -49,10 +47,9 @@ class KMer:
 
     def fit(self, dataset: Dataset) -> 'KMer':
         '''
-            Fits the descriptor to the dataset
+        Fits the descriptor to the dataset
 
-        :param dataset : The dataset to fit the descriptor to
-
+        :param dataset: The dataset to fit the descriptor to
         :return KMer: The fitted descriptor
         '''
         # generate the k-mers
@@ -61,10 +58,10 @@ class KMer:
 
     def _get_sequence_k_mer_composition(self, sequence: str) -> np.ndarray:
         '''
-        Calculates the k-mer composition of the sequence.
+        Calculates the k-mer composition of the sequence
 
-        :param sequence : str. The sequence to calculate the k-mer composition for.
-        :return: list of float. The k-mer composition of the sequence.
+        :param sequence : The sequence to calculate the k-mer composition for
+        :return: The k-mer composition of the sequence
         '''
 
         # calculate the k-mer composition
@@ -79,10 +76,10 @@ class KMer:
 
     def transform(self, dataset: Dataset) -> Dataset:
         '''
-        Transforms the dataset.
+        Transforms the dataset
 
-        :param dataset: The dataset to transform.
-        :return: The transformed dataset.
+        :param dataset: The dataset to transform
+        :return: The transformed dataset
         '''
 
         # calculate the k-mer composition
@@ -95,10 +92,10 @@ class KMer:
 
     def fit_transform(self, dataset: Dataset) -> Dataset:
         '''
-        Fits the descriptor to the dataset and transforms the dataset.
+        Fits the descriptor to the dataset and transforms the dataset
 
-        :param dataset : The dataset to fit the descriptor to and transform.
-        :return: The transformed dataset.
+        :param dataset : The dataset to fit the descriptor to and transform
+        :return: The transformed dataset
         '''
         self.fit(dataset)
         return self.transform(dataset)

@@ -7,12 +7,11 @@ from src.si.data.dataset import Dataset
 
 def train_test_split(dataset: Dataset, test_size: float = 0.2, random_state: int = 42) -> tuple:
     '''
-        Random splits a dataset into a train and a test set.
+    Random splits a dataset into a train and a test set
 
     :param dataset: Dataset object
-    :param test_size: size of the test set.
-    :param random_state: seed to feed the random permutations.
-
+    :param test_size: size of the test set
+    :param random_state: seed to feed the random permutations
     :return tuple with training dataset and test dataset
     '''
     np.random.seed(random_state)
