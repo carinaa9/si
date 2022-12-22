@@ -18,6 +18,11 @@ class NN:
 
     :param layers: List of layers in the neural network.
     '''
+    #Uma rede neuronal éum processador paralelo capaz de adquirir 
+    # conhecimento em problemas não lineares e complexos.
+
+    # Iremos implementar um modelo de rede neuronal genérico 
+    # que permite definir arquiteturas (topologias) complexas---NN
 
     def __init__(self, layers: list, epochs: int = 1000, learning_rate: float = 0.01,
                  loss_function: Callable = mse, loss_derivate : Callable = mse_derivative,

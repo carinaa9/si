@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-
+from src.si.statisics.sigmoid_function import sigmoid_function
 
 class Dense:
     '''
@@ -63,7 +63,8 @@ class SigmoidActivation:
         '''
 
         self.X = X
-        return 1 / (1 + np.exp(-X))
+        
+        return sigmoid_function(X)
 
     def backward(self, error: np.ndarray, learning_rate: float) -> np.ndarray:
         '''
@@ -72,7 +73,7 @@ class SigmoidActivation:
         :param error: error
         :param learning_rate: learning rate of a model
         '''
-
+        
         sigmoid_derivate = 1 / (1 + np.exp(-self.X))
         sigmoid_derivate = sigmoid_derivate * (1 - sigmoid_derivate)
 
