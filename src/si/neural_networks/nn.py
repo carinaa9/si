@@ -18,7 +18,7 @@ class NN:
 
     :param layers: List of layers in the neural network.
     '''
-    #Uma rede neuronal éum processador paralelo capaz de adquirir 
+    #Uma rede neuronal é um processador paralelo capaz de adquirir 
     # conhecimento em problemas não lineares e complexos.
 
     # Iremos implementar um modelo de rede neuronal genérico 
@@ -32,10 +32,10 @@ class NN:
 
         :param layers: List of layers in the neural network.
         :param epochs: Number of epochs to train the model
-        :param learning_rate:
-        :param loss_function:
-        :param loss_derivate:
-        :param verbose:
+        :param learning_rate: learning rate
+        :param loss_function: loss function
+        :param loss_derivate: loss derivate function
+        :param verbose: if True will print the loss of each epoch
         '''
 
         self.layers = layers
@@ -70,6 +70,7 @@ class NN:
             # calcular o custo e fazer backward porpagation
             error = self.loss_derivate(y, y_pred)
             for layer in self.layers[::-1]: # ultima layer
+                # lista de erro ao contrario
                 error = layer.backward(error, self.learning_rate)
 
         # save history
@@ -77,6 +78,8 @@ class NN:
         self.history[epoch] = cost
 
         #print loss ---> secundario
+        if self.verbose:
+                print(f'Epoch {epoch}/{self.epochs} --- cost: {cost}')
 
         return self
 
@@ -115,10 +118,6 @@ class NN:
         '''
         y_pred = self.predict(dataset)
         return scoring_func(dataset.y, y_pred)
-
-
-# bias no foward tem sum pq ha varias camadas
-#
 
 
 if __name__ == '__main__':
