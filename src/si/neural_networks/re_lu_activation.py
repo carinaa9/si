@@ -57,7 +57,6 @@ class ReLuActivation:
 if __name__ == '__main__':
     import numpy as np
 
-
     x = np.array([1, 3, 5, -2, -5, 0])
     print(x)
     model = ReLuActivation()
