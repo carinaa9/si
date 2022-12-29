@@ -5,9 +5,10 @@ from typing import Callable
 import numpy as np
 
 from src.si.data.dataset import Dataset
+from src.si.neural_networks.layer import Dense
 from src.si.metrics.accuracy import accuracy
 from src.si.metrics.mse import mse_derivative, mse
-from src.si.neural_networks.layer import Dense
+
 
 
 class NN:
@@ -25,7 +26,7 @@ class NN:
     # que permite definir arquiteturas (topologias) complexas---NN
 
     def __init__(self, layers: list, epochs: int = 1000, learning_rate: float = 0.01,
-                 loss_function: Callable = mse, loss_derivate : Callable = mse_derivative,
+                 loss_function: Callable = mse, loss_derivative : Callable = mse_derivative,
                  verbose: bool = False):
         '''
         Initialize the neural network model.
@@ -42,7 +43,7 @@ class NN:
         self.epochs = epochs
         self.learning_rate = learning_rate
         self.loss_function = loss_function
-        self.loss_derivate = loss_derivate
+        self.loss_derivative = loss_derivative
         self.verbose = verbose
 
         self.history = {} # guarda os resultados do erro/ custo (valores previstos vs reais) de cada epoch
@@ -54,27 +55,28 @@ class NN:
         :param dataset: The dataset to fit the model to
         :return self: NN. The fitted model
         '''
-        # calcluamos os custos e alteramos os dos anteriores
+        # calculamos os custos e alteramos os dos anteriores
         # faz se isto x vezes pelo nº de epochs
         X = dataset.X
         y = dataset.y
 
-        for epoch in range(1, self.epochs +1):
+        for epoch in range(1, self.epochs + 1):
 
             # forward propagation
             y_true = np.reshape(dataset.y, (-1, 1))
             y_pred = np.array(dataset.X)
+
             for layer in self.layers:
                 y_pred = layer.forward(y_pred)
 
-            # calcular o custo e fazer backward porpagation
-            error = self.loss_derivate(y, y_pred)
+            # calcular o custo e fazer backward propagation
+            error = self.loss_derivative(y, y_pred)
             for layer in self.layers[::-1]: # ultima layer
                 # lista de erro ao contrario
                 error = layer.backward(error, self.learning_rate)
 
         # save history
-        cost = self.loss_function(y, y_pred)
+        cost = self.loss(y, y_pred)
         self.history[epoch] = cost
 
         #print loss ---> secundario
@@ -106,7 +108,7 @@ class NN:
         :return cost: The cost of the model
         '''
         y_pred = self.predict(dataset)
-        return self.loss(dataset.y, y_pred)
+        return self.loss_function(dataset.y, y_pred)
 
     def score(self, dataset: Dataset, scoring_func: Callable = accuracy) -> float:
         '''
