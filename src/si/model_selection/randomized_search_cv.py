@@ -25,7 +25,8 @@ def randomized_search_cv(model,
     # parameters --> combinação de parametros 
     # seeds --> seeds geradas para cada fold 
     # train --> scores do modelo no dataset de treino para cada fold 
-    # test --> scores do modelo no dataset de teste para cada fold 
+    # test --> scores do modelo no dataset de teste para cada fold
+
     scores = {
         'parameters': [],
         'seeds': [],
