@@ -110,8 +110,9 @@ class Dataset:
         '''
 
         # cria uma máscara com os registos a manter (com todos os valores preenchidos)
-
+        #np.logical_not computa qualquer valor de self.X que seja NaN e mete como uma mascara
         mask_na = np.logical_not(np.any(np.isnan(self.X), axis=1))
+
 
         # filtramos para manter apenas os registos que obedeçam à mascara de cima
         self.X = self.X[mask_na, :]
@@ -119,7 +120,7 @@ class Dataset:
 
     # fazer x== NaN
     # new_x = x[mask]
-    # nao usar drop na do pandas, tem de ser com o numpy
+    # nao usar drop na do pandas, tem de ser com o numpy --> logical not
 
     def fillna(self, value: int): #Nota que o objeto resultante não deve conter valores nulos em para nenhuma feature/variável independente.
         '''
@@ -127,6 +128,7 @@ class Dataset:
 
         :param value: a given value
         '''
+
         self.X = np.nan_to_num(self.X, nan = value)
 
 if __name__ == '__main__':

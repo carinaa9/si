@@ -50,7 +50,6 @@ class LogisticRegression:
             y_pred = (np.dot(dataset.X, self.theta)) + self.theta_zero
             y_pred = sigmoid_function(y_pred)
 
-
             # computing and updating the gradient with the learning rate
             # calcula o gradiente num dado ponto, subtrai ao gradiente novo o gradiente anterior para descer sempre
             # quanto menor a função de custo, mais perto estamos do minimo

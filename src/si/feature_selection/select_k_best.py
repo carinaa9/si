@@ -33,8 +33,7 @@ class SelectKBest:
         :return: dataset
         '''
         # quanto maior o F, a diferença vai ser mais significativa por isso selecionamos o maior f
-        idxs = np.argsort(self.F)[
-               -self.k:]  # retorna por ordem crescente os d«index do F, valores mais baixos/vai buscar ao contrario as 10 melhores com o -
+        idxs = np.argsort(self.F)[-self.k:]  # retorna por ordem crescente os d«index do F, valores mais baixos/vai buscar ao contrario as 10 melhores com o -
         features = np.array(dataset.features)[idxs]
         return Dataset(X=dataset.X[:, idxs], y=dataset.y, features=list(features), label=dataset.label)
 

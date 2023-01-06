@@ -38,7 +38,7 @@ class StackingClassifier:
 
         # predictions modelo treinado
         # guardar as previsões de cada modelo
-        predictions = np.array([model.predict(dataset) for model in self.models]) # é preciso fazer transposta aqui? ver depois nos testes
+        predictions = np.array([model.predict(dataset) for model in self.models])
         
         # treino modelo final
         #passar para dataset as predictions anteriores em forma de array e transposta

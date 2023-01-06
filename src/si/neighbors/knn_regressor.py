@@ -19,6 +19,7 @@ class KNNRegressor:
         '''
         self.k = k
         self.distance = distance
+        #estimados
         self.dataset = None
 
     def fit(self, dataset: Dataset) -> 'KNNRegressor':
@@ -28,6 +29,7 @@ class KNNRegressor:
         :param dataset: training dataset
         :return: self
         '''
+        #ARMAZENA O DATASET DE TREINO
         self.dataset = dataset  # dataset de treino para o modelo
         return self
 
@@ -38,10 +40,15 @@ class KNNRegressor:
         :param sample: The sample to get the closest label of
         :return label: The closest label
         '''
+        #distancia entre cada amostra e as varias amostras do dataset
         distances = self.distance(sample, self.dataset.X)
-        k_nearest_neighbors = np.argsort(distances)[:self.k]
-        k_nearest_neighbors_label = self.dataset.y[k_nearest_neighbors] # np.array com as varias classes
 
+        #obtem os indx dos k exemp mais semelhantes(menor distancia)
+        k_nearest_neighbors = np.argsort(distances)[:self.k]
+
+        #usa os indx para obter os valores correspondentes em Y
+        k_nearest_neighbors_label = self.dataset.y[k_nearest_neighbors] # np.array com as varias classes
+        #calcula a media
         return np.mean(k_nearest_neighbors_label)
         
 
@@ -55,6 +62,8 @@ class KNNRegressor:
         :param dataset: test dataset
         :return: an array of estimated classes for the test dataset
         '''
+        # ESTIMA A CLASSE PARA 1 AMOSTRA TENDO COMO BASSE OS K EXEMP + SEMELHANTES
+
         return np.apply_along_axis(self._get_closest_label, axis=1, arr=dataset.X)
 
     def score(self, dataset: Dataset) -> float:
@@ -64,5 +73,7 @@ class KNNRegressor:
         :param dataset: test dataset
         :return: calculating the error between forecasts and actual values
         '''
+        #CALCULA O ERRO ENTRE AS CLASSES ESTIMADAS E REAIS
+        #ERRO: RMSE
         prediction = self.predict(dataset)
         return rmse(dataset.y, prediction)

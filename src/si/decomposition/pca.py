@@ -20,9 +20,9 @@ class PCA:
         self.n_components = n_components
 
         #parametros estimados
-        self.mean = None
-        self.components = None
-        self.explained_variance = None
+        self.mean = None #media das amostras
+        self.components = None #componentes principais
+        self.explained_variance = None #variancia explicada
 
     def fit(self, dataset: Dataset) -> 'PCA':
         '''
@@ -30,6 +30,7 @@ class PCA:
 
         :param dataset: Dataset 
         '''
+        #ESTIMA A MÉDIA, COMPONENTES E VARIANCIA EXPLICADA
 
         # centrar os dados (inferir média de amostras e subtrair a media ao dataset)
         self.mean = np.mean(dataset.X, axis=0)
@@ -37,6 +38,7 @@ class PCA:
 
         # SVD
         #Vt transposto
+        #função do ppt
         U, S, Vt = np.linalg.svd(self.centered, full_matrices=False)
 
         # componentes principais (PC) - primeiros componentes do Vt
@@ -49,7 +51,7 @@ class PCA:
         #formula do ppt - S do svd
         EV = (S ** 2) / (len(dataset.X) - 1)
 
-        #variancia explicada
+        #variancia explicada corresponde aos 1º n_components de EV
         explained_variance = EV[:self.n_components] # primeiros componentes [:componentes]
         return explained_variance
 
@@ -60,6 +62,7 @@ class PCA:
 
         :param dataset: Dataset 
         '''
+        #CALCULA O DATASET REDUZIDO USANDO OS COMPONENTES PRINCIPAIS
 
         # centrar os dados
         #subtrair media ao dataset e usar a media do fit
@@ -68,10 +71,14 @@ class PCA:
 
         #calcular X reduced
         # V é a transposta de Vt entao tem de se transpor --> self.components.T
-        *rest, Vt = (dataset.X - (np.mean(dataset.X, axis = 0)))
+        #*rest, Vt = (dataset.X - (np.mean(dataset.X, axis = 0)))
+        # V = Vt.T
 
-        V = Vt.T
+        V = self.components.T
+        #multiplicação de matrizes: redução de X às comp principais
         X_reduced = np.dot(centered, V)
+
+
 
         return Dataset(X_reduced, dataset.y, dataset.features, dataset.label)
 
